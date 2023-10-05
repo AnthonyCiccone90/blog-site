@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const { Post, User } = require('../models');
-const auth = require('../utils/auth');
+const router = require("express").Router();
+const { Post, User } = require("../models");
+const auth = require("../utils/helpers");
 
 // Dashboard route
-router.get('/dashboard', auth, async (req, res) => {
+router.get("/dashboard", auth, async (req, res) => {
   try {
     // Fetch the user's blog posts along with associated user data
     const postData = await Post.findAll({
@@ -13,14 +13,14 @@ router.get('/dashboard', auth, async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['username'],
+          attributes: ["username"],
         },
       ],
-      order: [['created_at', 'DESC']], // Order posts by most recent
+      order: [["created_at", "DESC"]], // Order posts by most recent
     });
 
     // Render the dashboard view and pass in the user's blog post data
-    res.render('dashboard', {
+    res.render("dashboard", {
       posts: postData.map((post) => post.get({ plain: true })),
       logged_in: true, // Since this is a protected route, the user is logged in
     });

@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const { User } = require('../models');
-const auth = require('../utils/auth');
+const router = require("express").Router();
+const { User } = require("../models");
+const auth = require("../utils/helpers");
 
 // Sign-up route
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -19,14 +19,14 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login route
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   // Implement login logic here
 });
 
 // Logout route
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect('/');
+    res.redirect("/");
   });
 });
 

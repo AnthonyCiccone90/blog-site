@@ -16,7 +16,7 @@
       <a href="">Dashboard</a>
     </h1>
         <h1>
-      <a href="/login.handlebars.js">Login</a>
+      <a href="/views/login.handlebars">Login</a>
     </h1>
     <!-- Only display the logout button if the user is logged in -->
     {{#if logged_in}}
@@ -34,7 +34,7 @@
 
   <!-- Only include the logout script if the user is logged in -->
   {{#if logged_in}}
-  <script src="/js/logout.js"></script>
+  <script src="/public/logout.js"></script>
   {{/if}}
 </body>
 

@@ -1,3 +1,3 @@
-app.get('/login', (req, res) => {
+app.get('/public/login', (req, res) => {
     res.render('login');
 });

@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-// Import express-session
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 
@@ -11,7 +10,7 @@ const helpers = require('./utils/helpers');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up sessions
+
 const sess = {
     secret: 'Super secret secret',
     resave: false,
@@ -23,7 +22,8 @@ const sess = {
   const hbs = exphbs.create({ helpers });
   
   app.engine('handlebars', hbs.engine);
-  app.set('view engine', 'handlebars');
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
   
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));

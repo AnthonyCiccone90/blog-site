@@ -18,10 +18,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Login route
-router.post("/login", async (req, res) => {
-  // Implement login logic here
-});
 
 // Logout route
 router.post("/logout", (req, res) => {

@@ -3,6 +3,8 @@ const { Comment } = require("../models");
 const auth = require("../utils/helpers");
 
 // Create a new comment
+// POST http://localhost:3001/post/
+
 router.post("/", auth, async (req, res) => {
   try {
     const newComment = await Comment.create({
@@ -18,6 +20,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 // Update an existing comment
+// PUT http:localhost:3001/post/:id
 router.put("/:id", auth, async (req, res) => {
   try {
     const updatedComment = await Comment.update(

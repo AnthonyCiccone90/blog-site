@@ -3,6 +3,7 @@ const { Post, User } = require("../models");
 const auth = require("../utils/helpers");
 
 // Dashboard route
+//http://localhost:3001/dashboard/dashboard
 router.get("/dashboard", auth, async (req, res) => {
   try {
     // Fetch the user's blog posts along with associated user data

@@ -5,15 +5,8 @@ class Comment extends Model {}
 
 Comment.init(
   {
-    // Define model fields based on acceptance criteria
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    text: {
-      type: DataTypes.TEXT,
+    comment_text: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     user_id: {
@@ -24,18 +17,10 @@ Comment.init(
         key: 'id',
       },
     },
-    post_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'post',
-        key: 'id',
-      },
-    },
   },
   {
     sequelize,
-    timestamps: true, // Enable timestamps (createdAt and updatedAt)
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',

@@ -1,1 +1,13 @@
 <h1>This is the dashboard. It is used to make sure it is connected to the rest of the files. Handlebars in confusing and I hope I figure it out soon. I also want to see if I like this keyboard. Do you have any suggestions on a good keyboard?</h1>
+
+<h2>Your comments</h2>
+<ul>
+    {{#each comments}}
+    <li>{{this.comment_text}}</li>
+{{/each}}
+</ul>
+
+<form action="/dashboard/comments" method="POST">
+  <textarea name="comment_text" placeholder="Write a comment..."></textarea>
+  <button type="submit">Submit Comment</button>
+</form>

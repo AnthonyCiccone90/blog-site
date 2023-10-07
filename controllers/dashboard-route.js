@@ -8,38 +8,30 @@ router.get("/dashboard", (req, res) => {
 
 
 
+// controllers/dashboard-route.js
+
+router.get('/dashboard', async (req, res) => {
+  try {
+    // Fetch comments associated with the logged-in user
+    const commentsData = await Comment.findAll({
+      where: { user_id: req.session.user_id },
+      // Include any necessary associations, e.g., User
+    });
+
+    // Render the dashboard view and pass in the comments data
+    res.render('dashboard', {
+      comments: commentsData,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 
 
 
 
-// Dashboard route
-// //http://localhost:3001/dashboard/dashboard
-// router.get("/dashboard", auth, async (req, res) => {
-//   try {
-//     // Fetch the user's blog posts along with associated user data
-//     const postData = await Post.findAll({
-//       where: {
-//         user_id: req.session.user_id, // Filter by the logged-in user's ID
-//       },
-//       include: [
-//         {
-//           model: User,
-//           attributes: ["username"],
-//         },
-//       ],
-//       order: [["created_at", "DESC"]], // Order posts by most recent
-//     });
-
-//     // Render the dashboard view and pass in the user's blog post data
-//     res.render("dashboard", {
-//       posts: postData.map((post) => post.get({ plain: true })),
-//       logged_in: true, // Since this is a protected route, the user is logged in
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 module.exports = router;

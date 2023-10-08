@@ -24,8 +24,8 @@ router.post('/signup', async (req, res) => {
     req.session.user_id = newUser.id;
     req.session.logged_in = true;
 
-    // Redirect the user to a dashboard or homepage
-    res.redirect('/dashboard'); // Redirect to the appropriate route
+    res.status(200).json({ message: 'Signed up!' });
+    res.redirect('/dashboard');   
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Registration failed' });

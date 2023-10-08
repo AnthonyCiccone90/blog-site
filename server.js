@@ -22,17 +22,12 @@ const sess = {
   }),
 };
 
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(session(sess));
 
-app.use((req, res, next) => {
-  res.locals.logged_in = req.session.logged_in;
-  res.locals.userId = req.session.user_id;
-  next();
-});
 
 app.get('/', (req, res) => {
   res.render('homepage'); 
@@ -47,6 +42,12 @@ app.get('/login', (req, res) => {
 });
 
 app.use(routes);
+
+app.use((req, res, next) => {
+  res.locals.logged_in = req.session.logged_in;
+  res.locals.userId = req.session.user_id;
+  next();
+});
 
 app.set("views", path.join(__dirname, "views"));
 

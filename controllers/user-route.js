@@ -1,21 +1,30 @@
 const router = require("express").Router();
 const { User } = require("../models");
-const auth = require("../utils/helpers");
+const bcrypt = require('bcrypt');
 
 // Sign-up route
-router.post("/signup", async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const { username, email, password } = req.body;
+
+    // Hash the password before saving it
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await User.create({
+      username,
+      email,
+      password: hashedPassword, // Use the hashed password
+    });
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = newUser.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
-      res.redirect('/dashboard');
+      res.status(200).json({ message: 'Registration successful' });
     });
   } catch (err) {
-    res.status(400).json(err);
+    console.error(err);
+    res.status(500).json({ error: 'Registration failed' });
   }
 });
 

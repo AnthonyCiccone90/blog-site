@@ -11,8 +11,10 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-  secret: 'your_secret_key', // Replace with a secure secret key
-  cookie: {},
+  secret: process.env.SESSION_SECRET, // Use a secure, randomly generated secret
+  cookie: {
+    maxAge: 3600000, // Set an appropriate session timeout
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -21,6 +23,12 @@ const sess = {
 };
 
 app.use(session(sess));
+
+app.use((req, res, next) => {
+  res.locals.loggedIn = req.session.logged_in;
+  res.locals.userId = req.session.user_id;
+  next();
+});
 
 app.set("views", path.join(__dirname, "views"));
 

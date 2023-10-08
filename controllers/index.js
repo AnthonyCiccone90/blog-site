@@ -4,7 +4,7 @@ const router = require('express').Router();
 const homeRoutes = require('../controllers/homepage-route');
 const dashboardRoutes = require('../controllers/dashboard-route');
 const commentRoutes = require('../controllers/comment-route');
-const userRoutes = require('../controllers/user-routes');
+const userRoutes = require('../controllers/user-route');
 const loginRoutes = require('../controllers/login-route');
 
 // Define the routes by using the imported route files

@@ -1,3 +1,25 @@
+
+
+
+
+// utils/helpers.js
+
+// Custom middleware function to check if a user is authenticated
+const isAuthenticated = (req, res, next) => {
+    // Check if the user is logged in, e.g., by checking session data or tokens
+    if (req.session.logged_in) {
+      // User is authenticated, proceed to the next middleware or route handler
+      return next();
+    }
+  
+    // User is not authenticated, redirect to a login page or send an error response
+    res.status(401).json({ message: 'Unauthorized' });
+  };
+  
+  module.exports = {
+    isAuthenticated,
+  };
+  
 // const { User } = require('../models');
 
 // // Middleware for authentication

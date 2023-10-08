@@ -25,6 +25,10 @@
     {{#if logged_in}}
     <nav>
       <button class="btn" id="logout">logout</button>
+          <a href="/logout">Logout</a>
+            {{else}}
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Sign In</a>
     </nav>
     {{/if}}
   </header>

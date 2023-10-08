@@ -1,21 +1,7 @@
 const router = require('express').Router();
 const { Comment } = require('../models');
 
-// POST route to create a new comment
-router.post('/api/comments', async (req, res) => {
-  try {
-    // Create a new comment with the provided comment_text and user_id
-    const newComment = await Comment.create({
-      comment_text: req.body.comment_text,
-      user_id: req.session.user_id, // Assuming you have user session data
-    });
 
-    // Respond with the new comment data as JSON, or a success message
-    res.status(200).json(newComment);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
 
 module.exports = router;
 

@@ -42,6 +42,7 @@ app.get('/signup', (req, res) => {
   res.render('signup'); 
 });
 
+app.use(routes);
 
 app.set("views", path.join(__dirname, "views"));
 
@@ -49,9 +50,6 @@ const hbs = exphbs.create({ helpers });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
-
-
-app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));

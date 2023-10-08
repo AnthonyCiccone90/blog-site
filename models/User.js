@@ -12,12 +12,6 @@ class User extends Model {
 User.init(
   {
     // Define model fields based on acceptance criteria
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -42,6 +42,10 @@ app.get('/signup', (req, res) => {
   res.render('signup'); 
 });
 
+app.get('/login', (req, res) => {
+  res.render('login'); 
+});
+
 app.use(routes);
 
 app.set("views", path.join(__dirname, "views"));

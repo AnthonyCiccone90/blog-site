@@ -22,12 +22,24 @@ const sess = {
   }),
 };
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(session(sess));
 
 app.use((req, res, next) => {
-  res.locals.loggedIn = req.session.logged_in;
+  res.locals.logged_in = req.session.logged_in;
   res.locals.userId = req.session.user_id;
   next();
+});
+
+app.get('/', (req, res) => {
+  res.render('home'); // Render your home.handlebars template
+});
+
+app.get('/signup', (req, res) => {
+  res.render('signup'); // Render your signup.handlebars template
 });
 
 app.set("views", path.join(__dirname, "views"));
@@ -37,9 +49,6 @@ const hbs = exphbs.create({ helpers });
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 

@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const { Comment } = require('../models');
+// const router = require('express').Router();
+// const { Comment } = require('../models');
 
 
 
-module.exports = router;
+// module.exports = router;
 
 
 // // Update an existing comment

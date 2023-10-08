@@ -16,7 +16,7 @@ router.get("/dashboard", auth.isAuthenticated, async (req, res) => {
     // Render the dashboard view and pass in the comments data
     res.render('dashboard', {
       comments: commentsData,
-      loggedIn: req.session.loggedIn,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);

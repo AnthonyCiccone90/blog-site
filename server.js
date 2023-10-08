@@ -35,12 +35,13 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('home'); // Render your home.handlebars template
+  res.render('homepage'); 
 });
 
 app.get('/signup', (req, res) => {
-  res.render('signup'); // Render your signup.handlebars template
+  res.render('signup'); 
 });
+
 
 app.set("views", path.join(__dirname, "views"));
 

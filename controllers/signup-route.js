@@ -3,16 +3,20 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
-const saltRounds = 10;
 
-router.get('/signup', (req, res) => {
+router.get('/', (req, res) => {
   res.render('signup');
 });
 
 // Sign-up route
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      // If email or password is missing, send a 400 Bad Request response
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+    const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await User.create({
       email,

@@ -34,4 +34,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+router.get('/', async (req, res) => {
+  try {
+    // Fetch existing blog posts from the database
+    const blogPosts = await BlogPost.findAll();
+
+    // Render the homepage with a list of blog posts
+    res.render('homepage', { blogPosts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to retrieve blog posts' });
+  }
+});
+
 module.exports = router;

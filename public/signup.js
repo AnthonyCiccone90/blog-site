@@ -7,7 +7,7 @@ const signupFormHandler = async (event) => {
   
     // Check if the required fields are not empty
     if (username && email && password) {
-      const response = await fetch('/api/users', {
+      const response = await fetch('/signup', {
         method: 'POST',
         body: JSON.stringify({ username, email, password }),
         headers: { 'Content-Type': 'application/json' },
@@ -15,10 +15,7 @@ const signupFormHandler = async (event) => {
   
       if (response.ok) {
         alert('User registered successfully');
-        document.querySelector('#username-signup').value = '';
-        document.querySelector('#email-signup').value = '';
-        document.querySelector('#password-signup').value = '';
-        response.redirect('/dashboard'); // Redirect to the dashboard
+        document.location.replace('/dashboard');
       } else {
         alert('Failed to sign up.');
       }

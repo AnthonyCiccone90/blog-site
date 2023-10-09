@@ -35,6 +35,13 @@ router.post('/', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Registration failed' });
   }
+  if (response.ok) {
+    alert('User registered successfully');
+    res.redirect('/dashboard'); // Redirect to the dashboard page
+  } else {
+    alert('Failed to sign up.');
+  }
+  
 });
 
 module.exports = router;

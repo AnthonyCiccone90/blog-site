@@ -7,7 +7,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-// Handle user login
+// login route
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -18,10 +18,12 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    req.session.user_id = user.id;
-    req.session.logged_in = true;
-
-    res.status(200).json({ message: 'Login successful' });
+    // Save user session data
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.logged_in = true;
+      res.status(200).json({ message: 'Login successful' });
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Login failed' });

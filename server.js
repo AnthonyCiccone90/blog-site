@@ -37,6 +37,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get('/', (req, res) => {
   res.render('homepage'); 
 });
+app.get('/js/login.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript');
+  res.sendFile(path.join(__dirname, 'public', 'js', 'login.js'));
+});
 
 app.get('/dashboard', (req, res) => {
   res.render('dashboard'); 
@@ -57,6 +61,7 @@ app.use((req, res, next) => {
   res.locals.userId = req.session.user_id;
   next();
 });
+
 
 
 app.set("views", path.join(__dirname, "views"));

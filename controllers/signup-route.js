@@ -23,6 +23,18 @@ router.post('/', async (req, res) => {
       password: hashedPassword,
     });
 
+    const savedUser = await User.findOne({ where: { email } });
+
+    if (savedUser) {
+      // User was successfully saved, log their information
+      console.log('User registered successfully');
+      console.log('User ID:', savedUser.id);
+      console.log('User Email:', savedUser.email);
+      // You can log any other user properties as needed
+    } else {
+      console.log('User registration failed');
+    }
+
     req.session.user_id = newUser.id;
     req.session.logged_in = true;
 

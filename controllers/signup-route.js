@@ -1,4 +1,4 @@
-// routes/signup-route.js
+const express = require('express');
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
@@ -6,28 +6,27 @@ const { User } = require('../models');
 const saltRounds = 10;
 
 router.get('/signup', (req, res) => {
-  res.render('signup'); // Render the signup form
+  res.render('signup');
 });
 
 // Sign-up route
 router.post('/signup', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await User.create({
-      username,
       email,
       password: hashedPassword,
     });
 
-    req.session.save(() => {
-      req.session.user_id = newUser.id;
-      req.session.logged_in = true;
-      res.status(200).json({ message: 'Registration successful' });
-      res.redirect('/dashboard');
-    });
-  } catch (err) {
-    console.error(err);
+    req.session.user_id = newUser.id;
+    req.session.logged_in = true;
+
+    console.log('User registered successfully');
+
+    res.status(200).json({ message: 'Signed up!' });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Registration failed' });
   }
 });

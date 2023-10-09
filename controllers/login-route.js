@@ -1,17 +1,16 @@
+const express = require('express');
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../models'); 
 
-// Display the login form
 router.get('/login', (req, res) => {
   res.render('login');
 });
 
-// login route
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { id, username, email, password } });
 
     if (!user || !user.checkPassword(password)) {
       res.status(400).json({ error: 'Incorrect email or password' });

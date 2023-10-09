@@ -11,36 +11,26 @@ router.get('/', (req, res) => {
 // Sign-up route
 router.post('/', async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      // If email or password is missing, send a 400 Bad Request response
-      return res.status(400).json({ error: 'Email and password are required' });
+    const { username, email, password } = req.body;
+
+    // Check if a user with the same email already exists
+    const existingUser = await User.findOne({ where: { email } });
+
+    if (existingUser) {
+      return res.status(400).json({ error: 'User with this email already exists' });
     }
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Create a new user in the database
     const newUser = await User.create({
-      email,
-      password: hashedPassword,
+      username: username,
+      email: email,
+      password: password
     });
-
-    const savedUser = await User.findOne({ where: { email } });
-
-    if (savedUser) {
-      // User was successfully saved, log their information
-      console.log('User registered successfully');
-      console.log('User ID:', savedUser.id);
-      console.log('User Email:', savedUser.email);
-      // You can log any other user properties as needed
-    } else {
-      console.log('User registration failed');
-    }
 
     req.session.user_id = newUser.id;
     req.session.logged_in = true;
 
-    console.log('User registered successfully');
-
-    res.status(200).json({ message: 'Signed up!' });
+    res.status(200).json({ message: 'Signed up successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Registration failed' });

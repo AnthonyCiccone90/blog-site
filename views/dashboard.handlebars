@@ -14,3 +14,9 @@
   <textarea name="comment_text" placeholder="Post comment"></textarea>
   <button type="submit">Post</button>
 </form>
+
+{{#if signupSuccess}}
+<div id="signup-success-message">
+  User signed up successfully!
+</div>
+{{/if}}

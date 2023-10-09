@@ -13,7 +13,7 @@ router.get('/signup', (req, res) => {
 router.post('/signup', async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await User.create({
       username,
       email,
@@ -24,6 +24,7 @@ router.post('/signup', async (req, res) => {
       req.session.user_id = newUser.id;
       req.session.logged_in = true;
       res.status(200).json({ message: 'Registration successful' });
+      res.redirect('/dashboard');
     });
   } catch (err) {
     console.error(err);

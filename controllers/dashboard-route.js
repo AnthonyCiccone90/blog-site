@@ -6,22 +6,28 @@ router.get("/dashboard", (req, res) => {
   res.render("dashboard");
 });
 
-router.get("/dashboard", auth.isAuthenticated, async (req, res) => {
-  try {
-    // Fetch comments associated with the logged-in user
-    const commentsData = await Comment.findAll({
-      where: { user_id: req.session.user_id },
-    });
-
-    // Render the dashboard view and pass in the comments data
-    res.render('dashboard', {
-      comments: commentsData,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get('/dashboard', (req, res) => {
+  const signupSuccess = req.session.signupSuccess || false;
+  req.session.signupSuccess = false;
+  res.render('dashboard', { signupSuccess });
 });
+
+// router.get("/dashboard", auth.isAuthenticated, async (req, res) => {
+//   try {
+//     // Fetch comments associated with the logged-in user
+//     const commentsData = await Comment.findAll({
+//       where: { user_id: req.session.user_id },
+//     });
+
+//     // Render the dashboard view and pass in the comments data
+//     res.render('dashboard', {
+//       comments: commentsData,
+//       logged_in: req.session.logged_in,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.post("/dashboard/posts/comments", async (req, res) => {
   try {

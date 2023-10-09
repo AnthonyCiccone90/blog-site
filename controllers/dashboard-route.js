@@ -29,20 +29,20 @@ router.get('/dashboard', (req, res) => {
 //   }
 // });
 
-router.post("/dashboard/posts/comments", async (req, res) => {
-  try {
-    const newComment = await Comment.create({
-      comment_text: req.body.comment_text,
-      user_id: req.session.user_id,
-    });
-    res.render('dashboard', { logged_in: true })
-    res.status(200).json(newComment);
-    res.redirect("/dashboard");
-  } catch (err) {
-    res.status(400).json(err);
-  }
+// router.post("/dashboard/posts/comments", async (req, res) => {
+//   try {
+//     const newComment = await Comment.create({
+//       comment_text: req.body.comment_text,
+//       user_id: req.session.user_id,
+//     });
+//     res.render('dashboard', { logged_in: true })
+//     res.status(200).json(newComment);
+//     res.redirect("/dashboard");
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
 
-});
+// });
 
 
 

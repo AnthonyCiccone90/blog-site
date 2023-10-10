@@ -1,16 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const flash = require('express-flash');
+
+// Middleware to set up flash messages
+router.use(flash());
 
 router.get('/logout', (req, res) => {
-  res.render('dashboard', { logoutSuccessful: true });
+  console.log('Logout route reached');
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Logout failed' });
+    }
+    res.redirect('/login');
+  });
 });
 
 router.post('/logout', async (req, res) => {
   try {
-    // Clear user session data
     req.session.destroy(() => {
-      res.locals.logoutSuccessful = true;
-      res.redirect('/');
+      req.flash('success', 'Logged out');
+      res.redirect('/login');
     });
   } catch (error) {
     console.error(error);

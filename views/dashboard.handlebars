@@ -1,6 +1,6 @@
 <h1>This is the dashboard. It is used to make sure it is connected to the rest
-  of the files. Handlebars in confusing and I hope I figure it out soon. I also
-  want to see if I like this keyboard. Do you have any suggestions on a good
+  of the files. Handlebars is confusing, and I hope I figure it out soon. I also
+  want to see if I like this keyboard. Do you have any suggestions for a good
   keyboard?</h1>
 
 <h2>Your comments</h2>
@@ -10,16 +10,21 @@
   {{/each}}
 </ul>
 
-<form action="/dashboard/posts/comments" method="POST">
+<form action="/" method="POST">
   <textarea name="comment_text" placeholder="Post comment"></textarea>
   <button type="submit">Post</button>
 </form>
 
-{{#if logged_in}}
-<p>User created successfully!</p>
-  <a href="/logout"Logout></a>
+{{#if query.logout}}
+  <p>Successfully logged out!</p>
+  <a href="/login">Login</a>
+  <a href="/signup">Sign up</a>
 {{else}}
+  {{#if logged_in}}
+    <p>User created successfully!</p>
+    <a href="/logout" id="logout">Logout</a>
+  {{else}}
     <a href="/login">Login</a>
     <a href="/signup">Sign up</a>
+  {{/if}}
 {{/if}}
-

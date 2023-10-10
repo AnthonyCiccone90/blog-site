@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
-const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const helpers = require("./utils/helpers");
@@ -37,6 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get('/', (req, res) => {
   res.render('homepage'); 
 });
+
 app.get('/js/login.js', (req, res) => {
   res.setHeader('Content-Type', 'application/javascript');
   res.sendFile(path.join(__dirname, 'public', 'js', 'login.js'));
@@ -54,7 +54,8 @@ app.get('/login', (req, res) => {
   res.render('login'); 
 });
 
-app.use(routes);
+const routes = require('./controllers'); // Import the routes
+app.use('/', routes); // Mount the routes at the root path
 
 app.set("views", path.join(__dirname, "views"));
 

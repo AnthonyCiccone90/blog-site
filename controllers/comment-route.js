@@ -5,23 +5,19 @@ const { isAuthenticated } = require('../utils/helpers');
 
 
 
-router.post('/dashboard/posts/comments', auth, async (req, res) => {
-    try {
-        const newComment = await Comment.create({
-            comment_text: req.body.comment_text,
-            user_id: req.session.user_id,
-        });
-        const commentWithDetails = {
-            comment_text: newComment.comment_text,
-            user_id: req.session.user_id,
-            username: req.session.username,
-            created_at: newComment.created_at,
-        };
-        res.status(200).json(commentWithDetails);
-    } catch (error) {
-        res.status(500).json(error);
-    }
+router.post('/comments', auth, async (req, res) => {
+  try {
+    const newComment = await Comment.create({
+      text: req.body.comment_text, 
+      username: req.session.username, 
+      user_id: req.session.user_id,
+    });
+    // ...
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
+
 
 // Update an existing comment
 router.put("/:id", auth, async (req, res) => {

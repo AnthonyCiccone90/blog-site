@@ -6,11 +6,20 @@ router.get("/dashboard", (req, res) => {
   res.render("dashboard");
 });
 
-router.get('/dashboard', (req, res) => {
-  const signupSuccess = req.session.signupSuccess || false;
-  req.session.signupSuccess = false;
-  res.render('dashboard', { signupSuccess });
+router.get('/', async (req, res) => {
+  try {
+    // Fetch posts and their associated comments
+    const posts = await Post.findAll({
+      include: Comment,
+    });
+
+    res.render('dashboard', { posts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
 
 // router.get("/dashboard", auth.isAuthenticated, async (req, res) => {
 //   try {

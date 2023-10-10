@@ -15,16 +15,25 @@
   <button type="submit">Post</button>
 </form>
 
+
 {{#if query.logout}}
-  <p>Successfully logged out!</p>
+  <p>Successfully logged out</p> <!-- Display "Logged out" when user is logged in -->
   <a href="/login">Login</a>
   <a href="/signup">Sign up</a>
 {{else}}
   {{#if logged_in}}
-    <p>User created successfully!</p>
+    <p>Logged in</p> <!-- Display "Logged in" when user is logged in -->
     <a href="/logout" id="logout">Logout</a>
-  {{else}}
-    <a href="/login">Login</a>
-    <a href="/signup">Sign up</a>
   {{/if}}
+  {{#if userCreated}}
+    <p>User created successfully!</p> <!-- Display "User created successfully" when a new user is signed up -->
+  {{/if}}
+  {{#unless logged_in}}
+    <a href="/login">Login</a>
+  {{/unless}}
+  {{#unless userCreated}}
+    <a href="/signup">Sign up</a>
+  {{/unless}}
 {{/if}}
+
+<script src="/public/logout.js"></script>

@@ -13,8 +13,8 @@ const logoutRoutes = require('../controllers/logout-route');
 router.use('/', homeRoutes); // Homepage route
 router.use('/dashboard', dashboardRoutes); // Dashboard route
 router.use('/posts', commentRoutes); // Routes for creating, updating, and deleting posts
-router.use('/login', loginRoutes);
-router.use('/signup', signupRoutes);
-router.use('/logout', logoutRoutes); 
+router.use('/login', loginRoutes); // Logs in
+router.use('/signup', signupRoutes);  // Creates new user
+router.use('/logout', logoutRoutes); // Logs out
 
 module.exports = router;

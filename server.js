@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const flash = require('express-flash');
+const routes = require('./controllers'); 
 const exphbs = require("express-handlebars");
 const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -56,8 +57,7 @@ app.get('/login', (req, res) => {
   res.render('login'); 
 });
 
-const routes = require('./controllers'); // Import the routes
-app.use('/', routes); // Mount the routes at the root path
+app.use(routes);
 
 app.set("views", path.join(__dirname, "views"));
 

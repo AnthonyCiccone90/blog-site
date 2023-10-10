@@ -1,15 +1,15 @@
-const express = require('express');
-const router = require('express').Router();
-const bcrypt = require('bcrypt');
-const { User } = require('../models');
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
 
-
-router.get('/', (req, res) => {
-  res.render('signup');
+// Route to render the signup page
+router.get("/", (req, res) => {
+  res.render("signup");
 });
 
-// Sign-up route
-router.post('/', async (req, res) => {
+// sign up route
+router.post("/", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -17,31 +17,25 @@ router.post('/', async (req, res) => {
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
-      return res.status(400).json({ error: 'User with this email already exists' });
+      return res
+        .status(400)
+        .json({ error: "User with this email already exists" });
     }
 
     // Create a new user in the database
     const newUser = await User.create({
       username: username,
       email: email,
-      password: password
+      password: password,
     });
 
     req.session.user_id = newUser.id;
     req.session.logged_in = true;
 
-    res.status(200).json({ message: 'Signed up successfully' });
+    res.redirect("/dashboard");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Registration failed' });
+    res.status(500).json({ error: "Registration failed" });
   }
-  if (response.ok) {
-    alert('User registered successfully');
-    res.redirect('/dashboard'); // Redirect to the dashboard page
-  } else {
-    alert('Failed to sign up.');
-  }
-  
 });
-
 module.exports = router;

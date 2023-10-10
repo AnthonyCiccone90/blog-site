@@ -7,13 +7,13 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-       return res.status(400).json({ message: 'Incorrect email or password' });
+    if (!user || !user.checkPassword(password)) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
 

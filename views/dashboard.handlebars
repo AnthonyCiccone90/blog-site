@@ -15,6 +15,11 @@
   <button type="submit">Post</button>
 </form>
 
-{{#if newUserCreated}}
+{{#if logged_in}}
 <p>User created successfully!</p>
+  <a href="/logout"Logout></a>
+{{else}}
+    <a href="/login">Login</a>
+    <a href="/signup">Sign up</a>
 {{/if}}
+

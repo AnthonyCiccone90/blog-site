@@ -12,6 +12,6 @@ This is a basic blog site created to post, edit and delete comments. It also inc
 https://github.com/AnthonyCiccone90/blog-site
 
 ## Dependencies used
-
+![Alt text](<Screenshot 2023-10-10 at 19.48.44.png>)
 <hr>
 User story provided by University of Denver FSF coding bootcamp.

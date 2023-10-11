@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-  secret: process.env.SESSION_SECRET, // Use a secure, randomly generated secret
+  secret: process.env.SESSION_SECRET, 
   cookie: {
     maxAge: 60000, // Session timeout after 1 minute
   },

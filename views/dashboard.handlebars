@@ -1,28 +1,28 @@
-<h1>This is the dashboard. It is used to make sure it is connected to the rest of the files. Handlebars is confusing, and I hope I figure it out soon. I also want to see if I like this keyboard. Do you have any suggestions for a good keyboard?</h1>
+<h1>This is the dashboard. It is used to make sure it is connected to the rest
+  of the files. Handlebars is confusing, and I hope I figure it out soon. I also
+  want to see if I like this keyboard. Do you have any suggestions for a good
+  keyboard?</h1>
 
 <h2>Your comments</h2>
 <ul>
   {{#each comments}}
-    <li>{{this.text}}</li>
+    <li>{{this.comment_text}}</li>
   {{/each}}
 </ul>
 
-<form action="/posts" method="POST"> <!-- Corrected action URL -->
-  <textarea name="comment_text" placeholder="Post comment"></textarea>
-  <button type="submit">Post</button>
-</form>
+
 
 {{#if query.logout}}
-  <p>Successfully logged out</p>
+  <p>Successfully logged out</p> <!-- Display "Logged out" when user is logged in -->
   <a href="/login">Login</a>
   <a href="/signup">Sign up</a>
 {{else}}
   {{#if logged_in}}
-    <p>Logged in</p>
+    <p>Logged in</p> <!-- Display "Logged in" when user is logged in -->
     <a href="/logout" id="logout">Logout</a>
   {{/if}}
   {{#if userCreated}}
-    <p>User created successfully!</p>
+    <p>User created successfully!</p> <!-- Display "User created successfully" when a new user is signed up -->
   {{/if}}
   {{#unless logged_in}}
     <a href="/login">Login</a>
